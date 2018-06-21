@@ -1,7 +1,7 @@
-﻿<Properties StartupConfiguration="{D29EF271-A9DE-C365-07B0-4E4065319A2C}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs">
+﻿<Properties StartupConfiguration="{67C8617E-04F3-3EC8-403F-E73573E46971}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FiringController.cs">
     <Files>
-      <File FileName="Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs" Line="85" Column="39" />
+      <File FileName="Assets/Scripts/FiringController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -9,6 +9,6 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.New_220FPS.Editor.Plugins PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.ItemProperties.New_220FPS PreferredExecutionTarget="Unity.Editor" />
   <MultiItemStartupConfigurations />
 </Properties>
