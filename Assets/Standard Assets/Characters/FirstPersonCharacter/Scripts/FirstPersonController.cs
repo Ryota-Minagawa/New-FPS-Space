@@ -81,6 +81,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+
+            if (Input.GetKey(KeyCode.C)&&m_PreviouslyGrounded)
+            {
+                m_Camera.gameObject.transform.localPosition = new Vector3(0, -0.3f, 0);
+
+            }
         }
 
 
@@ -105,8 +111,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
                                m_CharacterController.height/2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
             desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
 
-            m_MoveDir.x = desiredMove.x*speed;
-            m_MoveDir.z = desiredMove.z*speed;
+            m_MoveDir.x = desiredMove.x * speed;
+            m_MoveDir.z = desiredMove.z * speed;
+
+            if (Input.GetKey(KeyCode.C) && m_PreviouslyGrounded)
+            {
+                m_MoveDir.x = desiredMove.x * speed * 0.5f;
+                m_MoveDir.z = desiredMove.z * speed * 0.5f;
+            }
 
 
             if (m_CharacterController.isGrounded)
