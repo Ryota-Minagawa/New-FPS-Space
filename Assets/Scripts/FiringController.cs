@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class FiringController : MonoBehaviour
+public class FiringController : Photon.PunBehaviour
+
 {
 
     [SerializeField] Camera firstPersonCamera;
@@ -9,6 +10,7 @@ public class FiringController : MonoBehaviour
     AudioSource audioSource;
     AudioClip shotSound;
     AudioClip reloadSound;
+    PhotonView photonView;
     int bulletMaximum = 30;     public int bulletBox = 150;     public int bullet = 30;
     float bulletInterval;
     Ray ray;
@@ -19,6 +21,7 @@ public class FiringController : MonoBehaviour
         audioSource = gameObject.GetComponent<AudioSource>();
         shotSound = Resources.Load<AudioClip>("Audio/fire");
         reloadSound = Resources.Load<AudioClip>("Audio/reload");
+        photonView = GetComponent<PhotonView>();
     }
 
 
@@ -48,10 +51,22 @@ public class FiringController : MonoBehaviour
                 hit.collider.gameObject.GetComponent<TargetManager>().DeclineHp();
                 scoreManager.AddScore(hit.point);
             }
+            if (hit.collider.gameObject.tag == "Player")
+            {
+
+                hit.transform.GetComponent<NetworkPlayerManager>().photonView.RPC("GetShot", PhotonTargets.All);
+            }
         }
     }
 
-    void GenerateHitEffect()     {         GameObject hitEffect = Instantiate(firingEffect);         hitEffect.transform.position = ray.GetPoint(2.0f);         audioSource.PlayOneShot(shotSound);         Destroy(hitEffect, 0.3f);     }
+
+    void GenerateHitEffect()
+    {
+        GameObject hitEffect = Instantiate(firingEffect);
+        hitEffect.transform.position = ray.GetPoint(2.0f);
+        audioSource.PlayOneShot(shotSound);
+        Destroy(hitEffect, 0.3f);
+    }
 
     void GenerateMuzzleEffect()
     {
@@ -61,6 +76,15 @@ public class FiringController : MonoBehaviour
         Destroy(muzzleEffect, 0.3f);
     }
 
-    void reload()     {         audioSource.PlayOneShot(reloadSound);         while (bullet < bulletMaximum && bulletBox > 0)         {             ++bullet;             --bulletBox;         }     } 
-   
+    void reload()
+    {
+        audioSource.PlayOneShot(reloadSound);
+        while (bullet < bulletMaximum && bulletBox > 0)
+        {
+            ++bullet;
+            --bulletBox;
+        }
+    }
 }
+
+
